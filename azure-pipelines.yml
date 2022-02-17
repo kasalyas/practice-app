@@ -47,4 +47,4 @@ steps:
     azureSubscription: 'Pay-As-You-Go (6ba45975-4a83-481a-829a-f3f8e33af9c8)'
     appType: 'webAppLinux'
     appName: 'practice-app-checkit'
-    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
