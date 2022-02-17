@@ -61,7 +61,7 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
             inputs:
-              azureSubscription: 'Azure App Service Deploy: practice-app-checkit'
+              azureSubscription: $(azureSubscription)
               appName: $(WebAppName)
               appType: webAppLinux
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
