@@ -37,3 +37,11 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+
+- task: AzureWebApp@1
+  displayName: 'Azure App Service Deploy: website'
+  inputs:
+    azureSubscription: 'Practice app service connection'
+    appType: 'webAppLinux'
+    appName: 'practice-app-checkit'
+    package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
