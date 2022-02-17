@@ -56,16 +56,26 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: AzureRmWebAppDeployment@4
-            displayName: 'Azure App Service Deploy: practice-app-checkit'
+          - download: current
+            artifact: drop
+          - task: AzureWebApp@1
+            displayName: 'Azure App Service Deploy: website'
             inputs:
-              azureSubscription: $(azureSubscription)
+              azureSubscription: 'Azure App Service Deploy: practice-app-checkit'
+              appName: $(WebAppName)
               appType: webAppLinux
-              WebAppName: $(webAppName)
-              packageForLinux: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
-              RuntimeStack: 'NODE|16.x'
-              StartupCommand: 'npm run start'
-              ScriptType: 'Inline Script'
-              InlineScript: |
-                npm install
-                npm run build --if-present
+              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+
+          # - task: AzureRmWebAppDeployment@4
+          #   displayName: 'Azure App Service Deploy: practice-app-checkit'
+          #   inputs:
+          #     azureSubscription: $(azureSubscription)
+          #     appType: webAppLinux
+          #     WebAppName: $(webAppName)
+          #     packageForLinux: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+          #     RuntimeStack: 'NODE|16.x'
+          #     StartupCommand: 'npm run start'
+          #     ScriptType: 'Inline Script'
+          #     InlineScript: |
+          #       npm install
+          #       npm run build --if-present
