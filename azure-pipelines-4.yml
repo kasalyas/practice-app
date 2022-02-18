@@ -38,3 +38,10 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'Pay-As-You-Go(6ba45975-4a83-481a-829a-f3f8e33af9c8)'
+    appType: 'webAppLinux'
+    appName: 'practice-app-linux-app'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
